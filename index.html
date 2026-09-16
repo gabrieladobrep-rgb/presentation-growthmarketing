@@ -153,6 +153,65 @@
 
   footer{ text-align:center; font-size:12px; color:var(--muted); padding: 30px 0 10px; }
 
+  /* ---------- Cases em destaque: carrossel ---------- */
+  .case-carousel-wrap{ position:relative; }
+  .case-track{
+    display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding: 4px 2px 10px; scrollbar-width:none;
+  }
+  .case-track::-webkit-scrollbar{ display:none; }
+
+  .case-card{
+    scroll-snap-align:start; flex:0 0 250px;
+    background: var(--surface-alt); border:1px solid var(--border); border-radius:14px;
+    padding: 22px 20px;
+  }
+  .case-icon{ width:30px; height:30px; color: var(--secondary); margin-bottom:16px; }
+  .case-badge{ font-family: var(--font-display); font-size:25px; font-weight:700; color: var(--secondary); margin-bottom:8px; line-height:1.1; }
+  .case-badge.text{ font-size:15px; }
+  .case-company{ font-size:11px; color: var(--muted); text-transform:uppercase; letter-spacing:.06em; font-weight:700; margin-bottom:6px; }
+  .case-title{ font-size:14.5px; font-weight:700; color: var(--primary); margin-bottom:8px; line-height:1.3; }
+  .case-desc{ font-size:13px; color: var(--ink); line-height:1.5; margin:0; }
+
+  .case-nav{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:2;
+    width:34px; height:34px; border-radius:50%; background: var(--surface); color: var(--primary);
+    border:1px solid var(--border); font-size:18px; line-height:1; cursor:pointer;
+    box-shadow: 0 2px 10px rgba(45,10,78,0.14);
+  }
+  .case-nav:hover{ background: var(--secondary); color:#fff; border-color: var(--secondary); }
+  .case-nav.prev{ left:-16px; } .case-nav.next{ right:-16px; }
+  @media (max-width: 900px){ .case-nav{ display:none; } }
+
+  .case-dots{ display:flex; gap:6px; margin-top:12px; }
+  .case-dot{ width:7px; height:7px; border-radius:50%; background: var(--rail); border:none; cursor:pointer; padding:0; }
+  .case-dot.active{ background: var(--secondary); width:20px; border-radius:5px; transition: width .2s ease, background .2s ease; }
+
+  @media print{ .case-nav, .case-dots{ display:none; } .case-track{ overflow:visible; flex-wrap:wrap; } }
+
+  /* ---------- WhatsApp CTA flutuante ---------- */
+  .wa-fab{
+    position: fixed; right: 26px; bottom: 26px; z-index: 60;
+    display:flex; align-items:center; gap:10px;
+    background: #25D366; color:#fff; border-radius: 999px;
+    padding: 14px; box-shadow: 0 8px 22px rgba(37,211,102,0.4), 0 2px 8px rgba(45,10,78,0.18);
+    transition: padding .22s ease, box-shadow .18s ease, transform .18s ease;
+    text-decoration:none;
+  }
+  .wa-fab:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(37,211,102,0.5), 0 3px 10px rgba(45,10,78,0.22); text-decoration:none; }
+  .wa-fab svg{ flex-shrink:0; display:block; }
+  .wa-fab-label{
+    font-family: var(--font-body); font-weight:700; font-size: 14px;
+    max-width:0; overflow:hidden; white-space:nowrap; opacity:0; transition: max-width .28s ease, opacity .2s ease;
+  }
+  .wa-fab:hover .wa-fab-label, .wa-fab:focus-visible .wa-fab-label{ max-width: 160px; opacity:1; margin-right:2px; }
+  .wa-fab:focus-visible{ outline: 2px solid var(--primary); outline-offset: 3px; }
+  @media (max-width: 700px){
+    .wa-fab{ right:16px; bottom:16px; }
+    .wa-fab-label{ display:none; }
+  }
+  @media print{ .wa-fab{ display:none; } }
+
   @media print{
     .side .btns, .side nav{ display:none; }
     .side{ position:static; height:auto; }
@@ -172,6 +231,7 @@
     <nav id="sidenav">
       <a href="#resumo">Resumo</a>
       <a href="#competencias">Competências</a>
+      <a href="#cases">Cases</a>
       <a href="#experiencia">Experiência</a>
       <a href="#formacao">Formação</a>
       <a href="#certificacoes">Certificações</a>
@@ -210,6 +270,60 @@
         <span class="skill">Product Discovery</span>
         <span class="skill">IA aplicada a Marketing</span>
       </div>
+    </section>
+
+    <section id="cases">
+      <h2 class="section-title">Cases em destaque</h2>
+      <div class="case-carousel-wrap">
+        <button class="case-nav prev" id="casePrev" aria-label="Case anterior">&#8249;</button>
+
+        <div class="case-track" id="caseTrack">
+
+          <article class="case-card">
+            <svg class="case-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h18M3 5l7 8v6l4-2v-4l7-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="case-badge">ROI 2x+</div>
+            <div class="case-company">Arco Educação · International School</div>
+            <div class="case-title">Marketing como motor de receita</div>
+            <p class="case-desc">Estruturação de operação de inbound sales, CRM e lead scoring, gerando retorno acima de 2x sobre o investimento anual em marketing.</p>
+          </article>
+
+          <article class="case-card">
+            <svg class="case-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2" stroke-linejoin="round"/><path d="M2.5 9.5h19" stroke-linecap="round"/><path d="M6 14.5h5" stroke-linecap="round"/></svg>
+            <div class="case-badge text">1º no país</div>
+            <div class="case-company">Global66</div>
+            <div class="case-title">Lançamento do cartão Mastercard</div>
+            <p class="case-desc">Liderança do lançamento do primeiro cartão Mastercard da fintech na Colômbia, unindo growth, produto e operações em um mercado novo.</p>
+          </article>
+
+          <article class="case-card">
+            <svg class="case-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20V10M9 20V4M15 20v-7M21 20V8" stroke-linecap="round"/></svg>
+            <div class="case-badge">+1.000%</div>
+            <div class="case-company">Mina Bem-Estar</div>
+            <div class="case-title">Crescimento de receita em e-commerce</div>
+            <p class="case-desc">Responsabilidade direta pela receita do canal de e-commerce, com crescimento de mais de 1.000% no faturamento em 9 meses.</p>
+          </article>
+
+          <article class="case-card">
+            <svg class="case-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg>
+            <div class="case-badge text">Retenção &amp; ativação</div>
+            <div class="case-company">Rappi</div>
+            <div class="case-title">Growth em escala na América Latina</div>
+            <p class="case-desc">Estruturação da performance de marketing e campanhas no maior app de consumo da região, com melhora nas taxas de retenção e ativação de clientes.</p>
+          </article>
+
+          <article class="case-card">
+            <svg class="case-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 20v-6M17 20h-5M17 14l-5 5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="3.2"/><path d="M3 19c0-3 2.2-5 5-5s5 2 5 5" stroke-linecap="round"/></svg>
+            <div class="case-badge">2x</div>
+            <div class="case-company">DataScope</div>
+            <div class="case-title">Receita e base de clientes em dobro</div>
+            <p class="case-desc">Impacto direto no aumento de receita e clientes por meio de marketing digital e estratégias B2B para o mercado latino-americano.</p>
+          </article>
+
+        </div>
+
+        <button class="case-nav next" id="caseNext" aria-label="Próximo case">&#8250;</button>
+      </div>
+      <div class="case-dots" id="caseDots"></div>
     </section>
 
     <section id="experiencia">
@@ -438,6 +552,11 @@
   </main>
 </div>
 
+<a class="wa-fab" href="https://wa.me/5511994086244?text=Ol%C3%A1%20Gabriela%2C%20vi%20seu%20curr%C3%ADculo%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener" aria-label="Falar no WhatsApp com Gabriela Dobre">
+  <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M16.02 3C9.38 3 4 8.38 4 15.02c0 2.34.65 4.53 1.78 6.4L3.5 29l7.77-2.24a12.9 12.9 0 0 0 4.75.91h.01c6.64 0 12.02-5.38 12.02-12.02C28.05 8.38 22.67 3 16.02 3zm0 21.94h-.01a10 10 0 0 1-5.1-1.4l-.37-.22-4.6 1.33 1.36-4.48-.24-.38a9.86 9.86 0 0 1-1.53-5.28c0-5.48 4.46-9.94 9.95-9.94 2.66 0 5.15 1.04 7.03 2.92a9.86 9.86 0 0 1 2.91 7.02c0 5.48-4.46 9.94-9.94 9.94zm5.46-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.46-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.91-2.2-.24-.58-.48-.5-.67-.5-.17-.01-.37-.01-.57-.01s-.52.07-.79.37c-.27.3-1.04 1.02-1.04 2.47s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.35.19 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+  <span class="wa-fab-label">Falar no WhatsApp</span>
+</a>
+
 <script>
   function toggleRole(headEl){
     headEl.parentElement.classList.toggle('collapsed');
@@ -450,6 +569,42 @@
     document.querySelectorAll('.role').forEach(r => r.classList.toggle('collapsed', !allExpanded));
     this.textContent = allExpanded ? 'Recolher tudo' : 'Expandir tudo';
   });
+
+  // Carrossel de cases
+  (function(){
+    const track = document.getElementById('caseTrack');
+    const dotsWrap = document.getElementById('caseDots');
+    const cards = Array.from(track.children);
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'case-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Ir para case ' + (i + 1));
+      dot.addEventListener('click', () => cards[i].scrollIntoView({ behavior:'smooth', block:'nearest', inline:'start' }));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function step(dir){
+      const cardWidth = cards[0].getBoundingClientRect().width + 16;
+      track.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+    }
+    document.getElementById('casePrev').addEventListener('click', () => step(-1));
+    document.getElementById('caseNext').addEventListener('click', () => step(1));
+
+    const updateDots = () => {
+      const center = track.scrollLeft + track.clientWidth / 2;
+      let closest = 0, min = Infinity;
+      cards.forEach((c, i) => {
+        const mid = c.offsetLeft + c.offsetWidth / 2;
+        const d = Math.abs(mid - center);
+        if (d < min){ min = d; closest = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+    };
+    track.addEventListener('scroll', () => requestAnimationFrame(updateDots), { passive: true });
+    updateDots();
+  })();
 
   // Scroll-spy nav + navegação garantida via JS (não depende só do href="#id")
   const links = Array.from(document.querySelectorAll('#sidenav a'));
